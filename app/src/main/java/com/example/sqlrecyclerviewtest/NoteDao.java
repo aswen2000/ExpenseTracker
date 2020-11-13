@@ -10,5 +10,6 @@ public interface NoteDao {
     void insert(Note note);
 
 
+    
 
 }
