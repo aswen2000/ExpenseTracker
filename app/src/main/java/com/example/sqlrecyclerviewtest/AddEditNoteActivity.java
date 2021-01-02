@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
@@ -20,10 +21,17 @@ public class AddEditNoteActivity extends AppCompatActivity {
             "com.example.sqlrecyclerviewtest.EXTRA_PRIORITY";
     public static final String EXTRA_ID =
             "com.example.sqlrecyclerviewtest.EXTRA_ID";
+    public static final String EXTRA_YEAR =
+            "com.example.sqlrecyclerviewtest.EXTRA_YEAR";
+    public static final String EXTRA_MONTH =
+            "com.example.sqlrecyclerviewtest.EXTRA_MONTH";
+    public static final String EXTRA_DAYOFMONTH =
+            "com.example.sqlrecyclerviewtest.EXTRA_DAYOFMONTH";
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
+    private DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         numberPickerPriority = findViewById(R.id.number_picker_priority);
+        datePicker = findViewById(R.id.date_picker);
 
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
@@ -46,16 +55,29 @@ public class AddEditNoteActivity extends AppCompatActivity {
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1));
+            //TODO: Figure out how to set the date instead of it defaulting to the default values (USE A TEXTVIEW???)
+            System.out.println(intent.getIntExtra(EXTRA_PRIORITY, 3) + " xps1");
+            datePicker.updateDate(intent.getIntExtra(EXTRA_YEAR, 89), intent.getIntExtra(EXTRA_MONTH,4), intent.getIntExtra(EXTRA_DAYOFMONTH,20));
+
+
+
         }else{
             setTitle("Add Note");
         }
-        
+        System.out.println("Made it to end of AddEditNoteActivity onCreate xps");
     }
 
     private void saveNote(){
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
+        System.out.println(priority + " xps");
+        int year1 = datePicker.getYear();
+        System.out.println(year1 + " xps");
+        int month1 = datePicker.getMonth();
+        System.out.println(month1 + " xps");
+        int dayOfMonth1 = datePicker.getDayOfMonth();
+        System.out.println(dayOfMonth1 + " xps");
 
         if(title.trim().isEmpty() || description.trim().isEmpty()){
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
@@ -65,6 +87,9 @@ public class AddEditNoteActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_PRIORITY, priority);
+        data.putExtra(EXTRA_YEAR, year1);
+        data.putExtra(EXTRA_MONTH, month1);
+        data.putExtra(EXTRA_DAYOFMONTH, dayOfMonth1);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
 

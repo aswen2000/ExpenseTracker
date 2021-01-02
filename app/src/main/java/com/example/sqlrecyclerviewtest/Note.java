@@ -11,11 +11,17 @@ public class Note {
     private String title;
     private String description;
     private int priority;
+    private int dayOfMonth;
+    private int month;
+    private int year;
 
-    public Note(String title, String description, int priority) {
+    public Note(String title, String description, int priority, int year, int month, int dayOfMonth) {
         this.title = title;
         this.description = description;
         this.priority = priority;
+        this.year = year;
+        this.month = month;
+        this.dayOfMonth = dayOfMonth;
     }
 
     public void setId(int id) {
@@ -37,4 +43,10 @@ public class Note {
     public int getPriority() {
         return priority;
     }
+
+    public int getYear(){return year;}
+
+    public int getMonth(){return month;}
+
+    public int getDayOfMonth(){return dayOfMonth;}
 }

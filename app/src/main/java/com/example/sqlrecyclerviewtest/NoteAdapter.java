@@ -33,7 +33,10 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription()) &&
-                    oldItem.getPriority() == newItem.getPriority();
+                    oldItem.getPriority() == newItem.getPriority() &&
+                    oldItem.getYear() == newItem.getYear() &&
+                    oldItem.getMonth() == newItem.getMonth() &&
+                    oldItem.getDayOfMonth() == newItem.getDayOfMonth();
         }
     };
 
@@ -47,9 +50,12 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note currentNote = getItem(position);
+        String temp = currentNote.getMonth() + "/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
         holder.textViewTitle.setText(currentNote.getTitle());
         holder.textViewDescription.setText(currentNote.getDescription());
         holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
+//        holder.textViewDate.setText(temp);
+
 
     }
 
@@ -61,6 +67,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         private TextView textViewTitle;
         private TextView textViewDescription;
         private TextView textViewPriority;
+        private TextView textViewDate;
 
 
         public NoteHolder(@NonNull View itemView) {
@@ -68,6 +75,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
+            textViewDate = itemView.findViewById(R.id.date_picker);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
