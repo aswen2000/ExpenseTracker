@@ -5,8 +5,8 @@ package com.example.sqlrecyclerviewtest;
 
 //TODO: Be able to sort expenses by date
 //TODO: Be able to look back at expense amount over a certain time period
-//TODO: Add cost field and remove priority field
-//TODO: Add date into title on card preview (main activity screen), ex: Casey's - 1/11/2021
+//TODO: Force shortened description strings in card preview
+//TODO: Make all cost amounts formatted correctly
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddEditNoteActivity.class);
                 intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.getTitle());
                 intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.getDescription());
-                intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY, note.getPriority());
+//                intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY, note.getPriority());
+                intent.putExtra(AddEditNoteActivity.EXTRA_AMOUNT, note.getAmount());
                 intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.getId());
 
                 //testing
@@ -105,12 +106,13 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK){
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
+            String amount = data.getStringExtra(AddEditNoteActivity.EXTRA_AMOUNT);
+//            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
             int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 1);
             int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 1);
             int dayOfMonth = data.getIntExtra(AddEditNoteActivity.EXTRA_DAYOFMONTH, 1);
 
-            Note note = new Note(title, description, priority, year, month, dayOfMonth);
+            Note note = new Note(title, description, amount /*priority*/, year, month, dayOfMonth);
             noteViewModel.insert(note);
 
             Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
@@ -125,12 +127,13 @@ public class MainActivity extends AppCompatActivity {
 
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
+            String amount = data.getStringExtra(AddEditNoteActivity.EXTRA_AMOUNT);
+//            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
             int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 1);
             int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 1);
             int dayOfMonth = data.getIntExtra(AddEditNoteActivity.EXTRA_DAYOFMONTH, 1);
 
-            Note note = new Note(title, description, priority, year, month, dayOfMonth);
+            Note note = new Note(title, description, amount /*priority*/, year, month, dayOfMonth);
             note.setId(id);
             noteViewModel.update(note);
             Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();

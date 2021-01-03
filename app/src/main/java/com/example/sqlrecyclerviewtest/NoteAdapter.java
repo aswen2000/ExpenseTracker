@@ -1,5 +1,10 @@
 package com.example.sqlrecyclerviewtest;
 
+import android.graphics.Color;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +38,8 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription()) &&
-                    oldItem.getPriority() == newItem.getPriority() &&
+//                    oldItem.getPriority() == newItem.getPriority() &&
+                    oldItem.getAmount().equals(newItem.getAmount()) &&
                     oldItem.getYear() == newItem.getYear() &&
                     oldItem.getMonth() == newItem.getMonth() &&
                     oldItem.getDayOfMonth() == newItem.getDayOfMonth();
@@ -50,12 +56,22 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note currentNote = getItem(position);
+        String st;
         String temp = currentNote.getMonth() + "/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
-        holder.textViewTitle.setText(currentNote.getTitle());
-        holder.textViewDescription.setText(currentNote.getDescription());
-        holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
-//        holder.textViewDate.setText(temp);
+//        holder.textViewTitle.setText(currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear());
 
+        holder.textViewDescription.setText(currentNote.getDescription());
+//        holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
+        holder.textViewAmount.setText("$" + currentNote.getAmount());
+
+        st = currentNote.getAmount();
+
+//        yourTextView.setText(String.format("Value of a: %.2f", a));
+
+        String s= currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
+        SpannableString ss1=  new SpannableString(s);
+        ss1.setSpan(new RelativeSizeSpan(.75f), currentNote.getTitle().length()+2,s.length(), 0); // set size
+        holder.textViewTitle.setText(ss1);
 
     }
 
@@ -68,13 +84,15 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         private TextView textViewDescription;
         private TextView textViewPriority;
         private TextView textViewDate;
+        private TextView textViewAmount;
 
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
-            textViewPriority = itemView.findViewById(R.id.text_view_priority);
+//            textViewPriority = itemView.findViewById(R.id.text_view_priority);
+            textViewAmount = itemView.findViewById(R.id.text_view_amount);
             textViewDate = itemView.findViewById(R.id.date_picker);
 
             itemView.setOnClickListener(new View.OnClickListener() {
