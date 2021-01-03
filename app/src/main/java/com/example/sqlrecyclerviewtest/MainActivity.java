@@ -5,6 +5,8 @@ package com.example.sqlrecyclerviewtest;
 
 //TODO: Be able to sort expenses by date
 //TODO: Be able to look back at expense amount over a certain time period
+//TODO: Add cost field and remove priority field
+//TODO: Add date into title on card preview (main activity screen), ex: Casey's - 1/11/2021
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.getDescription());
                 intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY, note.getPriority());
                 intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.getId());
-                
+
                 //testing
                 intent.putExtra(AddEditNoteActivity.EXTRA_YEAR, note.getYear());
                 intent.putExtra(AddEditNoteActivity.EXTRA_MONTH, note.getMonth());
