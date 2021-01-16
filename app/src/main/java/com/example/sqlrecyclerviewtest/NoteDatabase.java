@@ -17,7 +17,6 @@ public abstract class NoteDatabase extends RoomDatabase {
 
     public static synchronized NoteDatabase getInstance(Context context) {
         if (instance == null) {
-            System.out.println("here1 checking null");
             instance = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "note_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
@@ -29,7 +28,6 @@ public abstract class NoteDatabase extends RoomDatabase {
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            System.out.println("here1 in onCreate");
             super.onCreate(db);
             new PopulateDbAsyncTask(instance).execute();
         }
@@ -45,10 +43,6 @@ public abstract class NoteDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            System.out.println("here in popdbasync inserts");
-//            noteDao.insert(new Note("Title 1", "Description 1", 1));
-//            noteDao.insert(new Note("Title 2", "Description 2", 2));
-//            noteDao.insert(new Note("Title 3", "Description 3", 3));
             return null;
         }
     }

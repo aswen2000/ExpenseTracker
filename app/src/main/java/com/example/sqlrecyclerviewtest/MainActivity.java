@@ -3,10 +3,13 @@ package com.example.sqlrecyclerviewtest;
 /*THE FRAMEWORK AND GENERAL LAYOUT OF THIS APP WAS CREATED BY CODING IN FLOW ON YOUTUBE.
 * I HAVE JUST WATCHED HIS TUTORIALS AND PLAYED AROUND WITH HIS CODE TO FIT MY NEEDS*/
 
-//TODO: Be able to sort expenses by date
-//TODO: Be able to look back at expense amount over a certain time period
-//TODO: Force shortened description strings in card preview
+//TODO: Be able to sort expenses by date (possibly using hidden number determined by (year*365 + month*30 + day ))
+//TODO: Be able to look back at expense amount over a certain time period (in stats)
 //TODO: Make all cost amounts formatted correctly
+//TODO: Fix bug where "Note not saved" shows in toast on back pressed from statsActivity
+//TODO: Add logo
+//TODO: Be able to search through titles/descriptions
+//TODO: Add safety guard for delete all
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
     private NoteViewModel noteViewModel;
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
+    public static final int STATS_REQUEST = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        FloatingActionButton buttonStats = findViewById(R.id.button_stats);
+        buttonStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StatsActivity.class);
+                startActivityForResult(intent, STATS_REQUEST);
+            }
+        });
 
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
         });
-        System.out.println("Made it to end of MainActivity onCreate xps");
     }
 
     @Override
@@ -129,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
             String amount = data.getStringExtra(AddEditNoteActivity.EXTRA_AMOUNT);
 //            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
-            int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 1);
-            int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 1);
-            int dayOfMonth = data.getIntExtra(AddEditNoteActivity.EXTRA_DAYOFMONTH, 1);
+            int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 2000);
+            int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 5);
+            int dayOfMonth = data.getIntExtra(AddEditNoteActivity.EXTRA_DAYOFMONTH, 20);
 
             Note note = new Note(title, description, amount /*priority*/, year, month, dayOfMonth);
             note.setId(id);

@@ -30,6 +30,9 @@ public class AddEditNoteActivity extends AppCompatActivity {
     public static final String EXTRA_DAYOFMONTH =
             "com.example.sqlrecyclerviewtest.EXTRA_DAYOFMONTH";
 
+    public static final String EXTRA_TOTAL_AMOUNT =
+            "com.example.sqlrecyclerviewtest.EXTRA_DAYOFMONTH";
+
     private EditText editTextTitle;
     private EditText editTextDescription;
 //    private NumberPicker numberPickerPriority;
@@ -55,21 +58,18 @@ public class AddEditNoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if(intent.hasExtra(EXTRA_ID)){
-            setTitle("Edit Note");
+            setTitle("Edit Expense");
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
 //            numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1));
             editTextAmount.setText(intent.getStringExtra(EXTRA_AMOUNT));
-            //TODO: Figure out how to set the date instead of it defaulting to the default values (USE A TEXTVIEW???)
-//            System.out.println(intent.getIntExtra(EXTRA_PRIORITY, 3) + " xps1");
             datePicker.updateDate(intent.getIntExtra(EXTRA_YEAR, 89), intent.getIntExtra(EXTRA_MONTH,4), intent.getIntExtra(EXTRA_DAYOFMONTH,20));
 
 
 
         }else{
-            setTitle("Add Note");
+            setTitle("New Expense");
         }
-        System.out.println("Made it to end of AddEditNoteActivity onCreate xps");
     }
 
     private void saveNote(){
@@ -77,13 +77,10 @@ public class AddEditNoteActivity extends AppCompatActivity {
         String description = editTextDescription.getText().toString();
 //        int priority = numberPickerPriority.getValue();
         String amount = editTextAmount.getText().toString();
-//        System.out.println(priority + " xps");
+//        String amount = editTextAmount.getText().toString();
         int year1 = datePicker.getYear();
-        System.out.println(year1 + " xps");
         int month1 = datePicker.getMonth();
-        System.out.println(month1 + " xps");
         int dayOfMonth1 = datePicker.getDayOfMonth();
-        System.out.println(dayOfMonth1 + " xps");
 
         if(title.trim().isEmpty() || description.trim().isEmpty()){
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();

@@ -17,6 +17,10 @@ public class NoteRepository {
         allNotes = noteDao.getAllNotes();
     }
 
+    public void sortNotesOnDate(){
+
+    }
+
     public void insert(Note note){
         new InsertNoteAsyncTask(noteDao).execute(note);
     }
@@ -63,6 +67,7 @@ public class NoteRepository {
             noteDao.update(notes[0]);
             return null;
         }
+
     }
 
     private static class DeleteNoteAsyncTask extends AsyncTask<Note, Void, Void> {

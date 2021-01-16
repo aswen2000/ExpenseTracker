@@ -56,17 +56,24 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note currentNote = getItem(position);
-        String st;
-        String temp = currentNote.getMonth() + "/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
-//        holder.textViewTitle.setText(currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear());
+        String tempDescription = currentNote.getDescription();
 
-        holder.textViewDescription.setText(currentNote.getDescription());
+        if(tempDescription.length() >= 40){
+            holder.textViewDescription.setText(formatDescription(currentNote.getDescription()));
+        }else{
+            holder.textViewDescription.setText(currentNote.getDescription());
+        }
+
+
+    /*tempDescription = (tempDescription.substring(0, 38)).trim() + "...";
+            holder.textViewDescription.setText(tempDescription);*/
+
+
+
 //        holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
         holder.textViewAmount.setText("$" + currentNote.getAmount());
 
-        st = currentNote.getAmount();
 
-//        yourTextView.setText(String.format("Value of a: %.2f", a));
 
         String s= currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
         SpannableString ss1=  new SpannableString(s);
@@ -114,5 +121,27 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     public void setOnItemClickListener(onItemClickListener listener){
         this.listener = listener;
     }
+
+    private String formatDescription(String s){
+        String temp = s;
+        for(int i = 38; i < temp.length(); i++){
+            if(temp.charAt(i) == ',' || temp.charAt(i) == ' '){
+                temp = temp.substring(0,i).trim() + "...";
+                return temp;
+            }
+        }
+
+        for(int i = 25; i < 38; i++){
+            if(temp.charAt(i) == ',' || temp.charAt(i) == ' '){
+                temp = temp.substring(0,i).trim() + "...";
+                return temp;
+            }
+        }
+
+        temp = temp.substring(0,35).trim() + "...";
+
+        return temp;
+    }
+
 
 }
