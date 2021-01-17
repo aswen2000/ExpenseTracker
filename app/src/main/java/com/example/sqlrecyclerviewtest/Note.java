@@ -10,13 +10,13 @@ public class Note {
     private int id;
     private String title;
     private String description;
-    private String amount;
+    private double amount;
 //    private int priority;
     private int dayOfMonth;
     private int month;
     private int year;
 
-    public Note(String title, String description, String amount /*int priority*/, int year, int month, int dayOfMonth) {
+    public Note(String title, String description, double amount /*int priority*/, int year, int month, int dayOfMonth) {
         this.title = title;
         this.description = description;
 //        this.priority = priority;
@@ -42,7 +42,7 @@ public class Note {
         return description;
     }
 
-    public String getAmount(){
+    public double getAmount(){
         return amount;
     }
 

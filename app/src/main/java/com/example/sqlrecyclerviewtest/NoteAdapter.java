@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription()) &&
 //                    oldItem.getPriority() == newItem.getPriority() &&
-                    oldItem.getAmount().equals(newItem.getAmount()) &&
+                    oldItem.getAmount() == (newItem.getAmount()) &&
                     oldItem.getYear() == newItem.getYear() &&
                     oldItem.getMonth() == newItem.getMonth() &&
                     oldItem.getDayOfMonth() == newItem.getDayOfMonth();
@@ -64,16 +65,9 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             holder.textViewDescription.setText(currentNote.getDescription());
         }
 
-
-    /*tempDescription = (tempDescription.substring(0, 38)).trim() + "...";
-            holder.textViewDescription.setText(tempDescription);*/
-
-
-
-//        holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
-        holder.textViewAmount.setText("$" + currentNote.getAmount());
-
-
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        double tempAmountDouble = currentNote.getAmount();
+        holder.textViewAmount.setText("$" + formatter.format(tempAmountDouble));
 
         String s= currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
         SpannableString ss1=  new SpannableString(s);
@@ -98,7 +92,6 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
-//            textViewPriority = itemView.findViewById(R.id.text_view_priority);
             textViewAmount = itemView.findViewById(R.id.text_view_amount);
             textViewDate = itemView.findViewById(R.id.date_picker);
 

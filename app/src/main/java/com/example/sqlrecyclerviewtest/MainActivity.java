@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK){
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
-            String amount = data.getStringExtra(AddEditNoteActivity.EXTRA_AMOUNT);
+            double amount = data.getDoubleExtra(AddEditNoteActivity.EXTRA_AMOUNT, 1);
 //            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
             int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 1);
             int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 1);
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
-            String amount = data.getStringExtra(AddEditNoteActivity.EXTRA_AMOUNT);
+            double amount = data.getDoubleExtra(AddEditNoteActivity.EXTRA_AMOUNT,1);
 //            int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
             int year = data.getIntExtra(AddEditNoteActivity.EXTRA_YEAR, 2000);
             int month = data.getIntExtra(AddEditNoteActivity.EXTRA_MONTH, 5);
