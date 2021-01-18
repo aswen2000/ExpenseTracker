@@ -13,12 +13,11 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 public class AddEditNoteActivity extends AppCompatActivity {
+
     public static final String EXTRA_TITLE =
             "com.example.sqlrecyclerviewtest.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
             "com.example.sqlrecyclerviewtest.EXTRA_DESCRIPTION";
-//    public static final String EXTRA_PRIORITY =
-//            "com.example.sqlrecyclerviewtest.EXTRA_PRIORITY";
     public static final String EXTRA_AMOUNT =
             "com.example.sqlrecyclerviewtest.EXTRA_AMOUNT";
     public static final String EXTRA_ID =
@@ -30,12 +29,14 @@ public class AddEditNoteActivity extends AppCompatActivity {
     public static final String EXTRA_DAYOFMONTH =
             "com.example.sqlrecyclerviewtest.EXTRA_DAYOFMONTH";
 
+    public static final String EXTRA_DATEVALUE =
+            "com.example.sqlrecyclerviewtest.EXTRA_DATEVALUE";
+
     public static final String EXTRA_TOTAL_AMOUNT =
             "com.example.sqlrecyclerviewtest.EXTRA_DAYOFMONTH";
 
     private EditText editTextTitle;
     private EditText editTextDescription;
-//    private NumberPicker numberPickerPriority;
     private DatePicker datePicker;
     private EditText editTextAmount;
 
@@ -72,11 +73,13 @@ public class AddEditNoteActivity extends AppCompatActivity {
         String description = editTextDescription.getText().toString();
 
         double amount = Double.parseDouble(editTextAmount.getText().toString());
-//        String amount = editTextAmount.getText().toString();
 
         int year1 = datePicker.getYear();
         int month1 = datePicker.getMonth();
         int dayOfMonth1 = datePicker.getDayOfMonth();
+
+        int dateValue = ((year1*1000)+(month1*10)+(dayOfMonth1));
+        System.out.println(dateValue + " is the dateValue");
 
         if(title.trim().isEmpty() || description.trim().isEmpty()){
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
@@ -89,6 +92,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         data.putExtra(EXTRA_YEAR, year1);
         data.putExtra(EXTRA_MONTH, month1);
         data.putExtra(EXTRA_DAYOFMONTH, dayOfMonth1);
+        data.putExtra(EXTRA_DATEVALUE, dateValue);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
 

@@ -39,11 +39,11 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription()) &&
-//                    oldItem.getPriority() == newItem.getPriority() &&
                     oldItem.getAmount() == (newItem.getAmount()) &&
                     oldItem.getYear() == newItem.getYear() &&
                     oldItem.getMonth() == newItem.getMonth() &&
-                    oldItem.getDayOfMonth() == newItem.getDayOfMonth();
+                    oldItem.getDayOfMonth() == newItem.getDayOfMonth() &&
+                    oldItem.getDateValue() == newItem.getDateValue();
         }
     };
 
@@ -65,11 +65,13 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             holder.textViewDescription.setText(currentNote.getDescription());
         }
 
+        //Set cost fields
         DecimalFormat formatter = new DecimalFormat("#0.00");
         double tempAmountDouble = currentNote.getAmount();
         holder.textViewAmount.setText("$" + formatter.format(tempAmountDouble));
 
-        String s= currentNote.getTitle() + "- " + currentNote.getMonth() +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
+        //Set title/date fields
+        String s= currentNote.getTitle() + "- " + (currentNote.getMonth()+1) +"/" + currentNote.getDayOfMonth() + "/" + currentNote.getYear();
         SpannableString ss1=  new SpannableString(s);
         ss1.setSpan(new RelativeSizeSpan(.75f), currentNote.getTitle().length()+2,s.length(), 0); // set size
         holder.textViewTitle.setText(ss1);
