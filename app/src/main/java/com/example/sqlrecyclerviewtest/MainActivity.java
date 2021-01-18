@@ -8,7 +8,6 @@ package com.example.sqlrecyclerviewtest;
 //TODO: Add logo
 //TODO: Be able to search through titles/descriptions
 //TODO: Add safe guard for delete all
-//TODO: Fix stats icon
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

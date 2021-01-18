@@ -30,9 +30,10 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:clickable="true"
-        android:src="@drawable/ic_save"
+        android:src="@drawable/ic_baseline_analytics_24"
         android:layout_gravity="bottom|start"
-        android:layout_margin="32dp"/>
+        android:layout_margin="32dp"
+        android:fillColor="#ffffff"/>
 
 
 
