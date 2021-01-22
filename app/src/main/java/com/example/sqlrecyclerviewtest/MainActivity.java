@@ -3,11 +3,19 @@ package com.example.sqlrecyclerviewtest;
 /*THE FRAMEWORK AND GENERAL LAYOUT OF THIS APP WAS CREATED BY CODING IN FLOW ON YOUTUBE.
 * I HAVE JUST WATCHED HIS TUTORIALS AND PLAYED AROUND WITH HIS CODE TO FIT MY NEEDS*/
 
+//TODO: Determine requirements for, and set up, stats page
 //TODO: Be able to look back at expense amount over a certain time period (in stats)
+
+//TODO: Add tagging functionality (food, gas, utilites, alc, etc.)
+//TODO: Add windows or popouts for calendar and tags in Add/Edit to reduce clutter
+
+//TODO: Try to use open source UI/UX libraries
 //TODO: Fix bug where "Note not saved" shows in toast on back pressed from statsActivity
 //TODO: Add logo
 //TODO: Be able to search through titles/descriptions
 //TODO: Add safe guard for delete all
+//TODO: Be able to add images of receipts
+//TODO: Add cold start loading screen
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
